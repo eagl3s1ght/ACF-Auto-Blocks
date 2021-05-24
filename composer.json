@@ -1,0 +1,8 @@
+{
+  "name": "eagl3s1ght/ACF-Auto-Blocks-fork",
+  "description": "ACF Auto Blocks forked by Eagl3s1ght",
+  "type": "wordpress-plugin",
+  "require": {
+    "composer/installers": "~1.0"
+  }
+}
