@@ -125,7 +125,7 @@ class ACF_Auto_Blocks
 
         $args = apply_filters('acf/auto_blocks/parse_block_options', $args);
 
-        # if(function_exists('ma_admin_dump')) ma_admin_dump('Registered block \\w name: ' . $args['name'], $args);
+        if (function_exists('console_log')) console_log('Registered block \\w name: ' . $args['name'], $args);
 
         acf_register_block($args);
       }
@@ -308,18 +308,18 @@ class ACF_Auto_Blocks
 
     foreach ($groups as $group) {
       if (array_key_exists('local', $group) && $group['local'] == 'php' &&  array_key_exists('location', $group) && gettype($group['location']) == 'array') {
-        # if (function_exists('ma_admin_dump')) ma_admin_dump("Imported php field " . $group['key'], $group);
+        if (function_exists('console_log')) console_log("Imported php field " . $group['key'], $group);
         $group['auto_block'] = 1;
         $group['auto_block_key'] = $group['key'];
       }
       if (false === array_key_exists('auto_block', $group)) {
-        # if(function_exists('ma_admin_dump')) ma_admin_dump("Has no auto_block key: " . $group['key'], $group);
+        if (function_exists('console_log')) console_log("Has no auto_block key: " . $group['key'], $group);
         continue;
       } else {
-        # if(function_exists('ma_admin_dump')) ma_admin_dump("Has auto_block key: " . $group['key'], $group);
+        if (function_exists('console_log')) console_log("Has auto_block key: " . $group['key'], $group);
       }
       if (!$group['location']) {
-        # if (function_exists('ma_admin_dump')) ma_admin_dump("Invalid location for auto block " . $group['key'], $group);
+        if (function_exists('console_log')) console_log("Invalid location for auto block " . $group['key'], $group);
         return [];
       }
       $is_block = ($group['auto_block'] == 1 && ACF_Auto_Blocks::check_block_location($group['location']));
@@ -338,7 +338,8 @@ class ACF_Auto_Blocks
   {
     $check = false;
 
-    if (!$array) return; # if(function_exists('ma_admin_notice__error'))  ma_admin_notice__error('Invalid block location');
+    if (!$array) return;
+    if (function_exists('console_log'))  console_log('Invalid block location');
 
     foreach ($array as $item) {
       if (!empty($item['param']) && $item['param'] == 'block') {
